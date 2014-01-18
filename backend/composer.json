@@ -1,0 +1,15 @@
+{
+    "require-dev": {
+        "doctrine/common": "2.4.*",
+        "doctrine/dbal": "2.4.1",
+        "doctrine/orm": "2.4.1",
+        "doctrine/doctrine-module": "0.*",
+        "respect/rest": "dev-develop",
+        "respect/validation": "dev-develop",
+        "mustache/mustache": "~2.1",        
+        "phpunit/phpunit": "3.7.*"
+    },
+    "autoload": {
+        "psr-0": {"Blog\\": "src/", "Base\\": "src/", "Apps\\": "src/", "Auth": "src/"}
+    }
+}
