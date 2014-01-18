@@ -1,15 +1,10 @@
 <?php 
 namespace Blog\Controllers;
 
-use Base\Core\ControllerRoutable;
 use Blog\Models\PostModel;
 
-final class BlogController extends ControllerRoutable
+// Not in use yet, but in the future it could be used. Think about the modal login form on root url...
+final class BlogController
 {
-    protected static $model;
 
-    public function __construct($em)
-    {
-        self::$model = new PostModel($em);
-    }
 }
