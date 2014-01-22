@@ -16,12 +16,24 @@ abstract class ModelBase
         self::$hydrator = new DoctrineHydrator($em, static::$_entity);
     }
 
-    public function getEntities ($order = NULL, $limit = NULL, $offset = NULL)
+    public function getEntities (Array $options)
     {
         $qb = self::$em->createQueryBuilder();
         $qb->select('e')
             ->from(static::$_entity, 'e');
 
+        if(array_key_exists('offset', $options)) {
+            $qb->setFirstResult($options['offset']);
+        }
+
+        if(array_key_exists('limit', $options)) {
+            $qb->setMaxResults($options['limit']);
+        }
+        
+        if(array_key_exists('orderby', $options)) {
+            $qb->orderBy('e' . '.' . $options['orderby']);
+        }
+        
         $entities = self::$em->createQuery($qb)->getArrayResult();
 
         return $entities;

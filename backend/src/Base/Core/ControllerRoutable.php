@@ -10,10 +10,6 @@ abstract class ControllerRoutable implements Routable
   
   public function get ($id = NULL)
   {
-      // temp TOEXCLUDE
-      $data = array('site'=>'O Programador Autodidata');
-      return $data;
-
       if (NULL === $id) {
           $entities = static::$model->getEntities();        
       } else {

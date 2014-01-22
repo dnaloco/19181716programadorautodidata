@@ -1,10 +1,10 @@
-<?php 
+<?php
 namespace Blog\Entities;
 
 /**
- * @Entity @Table(name="comments")
+ * @Entity @Table(name="permissions")
  */
-final class Comment
+final class Permission
 {
 	/**
 	 * @Id @Column(type="integer")
@@ -13,9 +13,9 @@ final class Comment
 	private $id;
 
 	/**
-	 * @Column(type="text")
+	 * @Column(length=20)
 	 */
-	private $comment;
+	private $permission;
 
     /**
      * Gets the value of id.
@@ -42,25 +42,25 @@ final class Comment
     }
 
     /**
-     * Gets the value of comment.
+     * Gets the value of permission.
      *
      * @return mixed
      */
-    public function getComment()
+    public function getPermission()
     {
-        return $this->comment;
+        return $this->permission;
     }
     
     /**
-     * Sets the value of comment.
+     * Sets the value of permission.
      *
-     * @param mixed $comment the comment
+     * @param mixed $permission the permission
      *
      * @return self
      */
-    public function setComment($comment)
+    public function setPermission($permission)
     {
-        $this->comment = $comment;
+        $this->permission = $permission;
 
         return $this;
     }

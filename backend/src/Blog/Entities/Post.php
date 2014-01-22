@@ -80,7 +80,7 @@ final class Post
 	/**
 	 * @ManyToMany(targetEntity="Comment")
 	 * @JoinTable(
-	 * 		name="post_tags",
+	 * 		name="post_comments",
 	 * 		joinColumns={@JoinColumn(name="post_id", referencedColumnName="id")},
 	 *		inverseJoinColumns={@JoinColumn(name="comment_id", referencedColumnName="id", unique=true)} 
 	 * )

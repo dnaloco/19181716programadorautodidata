@@ -3,11 +3,11 @@ namespace Blog\Models;
 
 use Base\Core\ModelBase;
 
-final class PostModel extends ModelBase
+final class CommentModel extends ModelBase
 {
 	public function __construct($em)
 	{
-		self::$_entity = 'Blog\Entities\Post';
+		self::$_entity = 'Blog\Entities\Comment';
 		$_em = $em;
 	}
 }
