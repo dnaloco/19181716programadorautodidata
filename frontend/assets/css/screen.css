@@ -5094,9 +5094,6 @@ th.hide-for-touch {
   display: table-cell !important; }
 
 /* Layouts */
-section#partial-content {
-  background-color: #D4D4D4; }
-
 header#default-header .header-title {
   text-align: center; }
 @media only screen and (max-width: 40em) {

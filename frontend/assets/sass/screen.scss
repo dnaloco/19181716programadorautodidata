@@ -10,8 +10,8 @@
 @import "foundation";
 
 /* Layouts */
-section#partial-content {
-	background-color: #D4D4D4;
+nav#default-menu {
+
 }
 
 header#default-header {
@@ -23,6 +23,14 @@ header#default-header {
 			}
 		}
 	}
+}
+
+section#partial-content {
+	
+}
+
+footer#default-footer {
+
 }
 
 /* Partials */
