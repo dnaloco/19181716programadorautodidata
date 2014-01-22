@@ -1,10 +1,10 @@
-<?php 
+<?php
 namespace Blog\Entities;
 
 /**
- * @Entity @Table(name="tags")
+ * @Entity
  */
-final class Tag
+final class Status
 {
 	/**
 	 * @Id @Column(type="integer")
@@ -13,11 +13,9 @@ final class Tag
 	private $id;
 
 	/**
-	 * @Column(length=20)
+	 * @Column(length="15")
 	 */
-	private $tag;
-
-	
+	private $status;
 
     /**
      * Gets the value of id.
@@ -44,26 +42,26 @@ final class Tag
     }
 
     /**
-     * Gets the value of tag.
+     * Gets the value of status.
      *
      * @return mixed
      */
-    public function getTag()
+    public function getStatus()
     {
-        return $this->tag;
+        return $this->status;
     }
     
     /**
-     * Sets the value of tag.
+     * Sets the value of status.
      *
-     * @param mixed $tag the tag
+     * @param mixed $status the status
      *
      * @return self
      */
-    public function setTag($tag)
+    public function setStatus($status)
     {
-        $this->tag = $tag;
+        $this->status = $status;
 
         return $this;
     }
-} 	
+}
