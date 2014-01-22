@@ -1,11 +1,23 @@
 {
   "name": "programadorautodidata",
   "version": "0.0.0",
-  "description": "",
+  "description": "Projeto Sobre um Blog Para Servir Como Portfólio para mostrar em uma entrevista de emprego",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "BSD-2-Clause"
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "grunt": "~0.4.2"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dnaloco/19181716programadorautodidata"
+  },
+  "bugs": {
+    "url": "https://github.com/dnaloco/19181716programadorautodidata/issues"
+  },
+  "homepage": "https://github.com/dnaloco/19181716programadorautodidata"
 }
