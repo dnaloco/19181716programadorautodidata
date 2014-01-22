@@ -5,15 +5,16 @@
 {{>layouts/default-head}}
 
 <body data-ng-app="BlogApp">
+
 	{{>layouts/default-menu}}
 
 	<div class="row">
 		{{>layouts/default-header}}
 	</div>
 
-	<div class="row">
+	<section class="row" id="partial-content">
 		<div data-ng-view></div>
-	</div>
+	</section>
 
 	<div class="row">
 		{{>layouts/default-footer}}

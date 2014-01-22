@@ -3,9 +3,27 @@
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 
+// SETTINGS OF FOUNDATION (that will substitute default variable values...)
+
 @import "compass/reset";
 @import "normalize";
 @import "foundation";
+
+/* Layouts */
+section#partial-content {
+	background-color: #D4D4D4;
+}
+
+header#default-header {
+	.header-title {
+		text-align: center;
+		@media only screen and (max-width: 40em) {
+			h1 {
+				font-size: 20px;
+			}
+		}
+	}
+}
 
 /* Partials */
 #partial-home {
@@ -15,6 +33,8 @@
 		}
 	}
 	#home-promos {
+		margin-bottom: -10px;
+
 		ul[class*="block-grid-"] {
 			margin-left: -($block-grid-default-spacing/2);
 			margin-right: -($block-grid-default-spacing/2);
@@ -25,6 +45,35 @@
 	}
 }
 
-#test {
-	color: blue;
+#excerpt-widget {
+
+	article {
+		img {
+			float: left;
+			margin: 5px;
+		}
+		p {
+			float: left;
+			text-align: justify;
+			text-justify: inter-word;
+		}
+
+		h3 {
+			float: left;
+		}
+	}
+
+	.last-excerpt-article {
+		
+	}
+	
+	.more-excerpt-articles {
+		h3 {
+			font-size: rem-calc(23);
+		}
+
+		p {
+			font-size: rem-calc(14);
+		}
+	}
 }

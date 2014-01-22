@@ -5093,14 +5093,37 @@ th.hide-for-touch {
 .touch th.show-for-touch {
   display: table-cell !important; }
 
+/* Layouts */
+section#partial-content {
+  background-color: #D4D4D4; }
+
+header#default-header .header-title {
+  text-align: center; }
+@media only screen and (max-width: 40em) {
+  header#default-header .header-title h1 {
+    font-size: 20px; } }
+
 /* Partials */
 #partial-home #home-banner ul {
   margin-left: 0; }
+#partial-home #home-promos {
+  margin-bottom: -10px; }
 #partial-home #home-promos ul[class*="block-grid-"] {
   margin-left: -0.625rem;
   margin-right: -0.625rem; }
 #partial-home #home-promos ul[class*="block-grid-"] li {
   text-align: center; }
 
-#test {
-  color: blue; }
+#excerpt-widget article img {
+  float: left;
+  margin: 5px; }
+#excerpt-widget article p {
+  float: left;
+  text-align: justify;
+  text-justify: inter-word; }
+#excerpt-widget article h3 {
+  float: left; }
+#excerpt-widget .more-excerpt-articles h3 {
+  font-size: 1.4375rem; }
+#excerpt-widget .more-excerpt-articles p {
+  font-size: 0.875rem; }

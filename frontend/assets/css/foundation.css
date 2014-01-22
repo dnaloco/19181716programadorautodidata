@@ -133,10 +133,10 @@ select {
   margin-right: 0; }
 .row .row {
   width: auto;
-  margin-left: -0.9375rem;
-  margin-right: -0.9375rem;
+  margin-left: -0.625rem;
+  margin-right: -0.625rem;
   margin-top: 0;
-  margin-bottom: 0;
+  margin-bottom: 1.25rem;
   max-width: none;
   *zoom: 1; }
 .row .row:before, .row .row:after {
@@ -157,8 +157,8 @@ select {
 
 .column, .columns {
   position: relative;
-  padding-left: 0.9375rem;
-  padding-right: 0.9375rem;
+  padding-left: 0.625rem;
+  padding-right: 0.625rem;
   width: 100%;
   float: left; }
 
@@ -289,8 +289,8 @@ select {
 
   .column, .columns {
     position: relative;
-    padding-left: 0.9375rem;
-    padding-right: 0.9375rem;
+    padding-left: 0.625rem;
+    padding-right: 0.625rem;
     float: left; }
 
   .small-1 {
@@ -524,8 +524,8 @@ select {
 
   .column, .columns {
     position: relative;
-    padding-left: 0.9375rem;
-    padding-right: 0.9375rem;
+    padding-left: 0.625rem;
+    padding-right: 0.625rem;
     float: left; }
 
   .medium-1 {
@@ -869,8 +869,8 @@ select {
 
   .column, .columns {
     position: relative;
-    padding-left: 0.9375rem;
-    padding-right: 0.9375rem;
+    padding-left: 0.625rem;
+    padding-right: 0.625rem;
     float: left; }
 
   .large-1 {
@@ -1111,7 +1111,7 @@ select {
   background: #e3e3e3; }
 .accordion .content {
   display: none;
-  padding: 0.9375rem; }
+  padding: 0.625rem; }
 .accordion .content.active {
   display: block;
   background: white; }
@@ -1170,7 +1170,7 @@ select {
 [class*="block-grid-"] {
   display: block;
   padding: 0;
-  margin: 0 0 0 -0.625rem;
+  margin: 0 0 0 0;
   *zoom: 1; }
 [class*="block-grid-"]:before, [class*="block-grid-"]:after {
   content: " ";
@@ -3542,15 +3542,15 @@ table thead tr th, table tfoot tr th, table tbody tr td, table tr td, table tfoo
 .tabs-content > .content {
   display: none;
   float: left;
-  padding: 0.9375rem 0; }
+  padding: 0.625rem 0; }
 .tabs-content > .content.active {
   display: block; }
 .tabs-content > .content.contained {
-  padding: 0.9375rem; }
+  padding: 0.625rem; }
 .tabs-content.vertical {
   display: block; }
 .tabs-content.vertical > .content {
-  padding: 0 0.9375rem; }
+  padding: 0 0.625rem; }
 
 @media only screen and (min-width: 40.063em) {
   .tabs.vertical {
