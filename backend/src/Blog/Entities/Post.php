@@ -50,6 +50,17 @@ final class Post
 	 */
 	private $category;
 
+
+	/**
+	 * @ManyToMany(targetEntity="Tag")
+	 * @JoinTable(
+	 * 		name="post_tags",
+	 * 		joinColumns={@JoinColumn(name="post_id", referencedColumnName="id")},
+	 *		inverseJoinColumns={@JoinColumn(name="tag_id", referencedColumnName="id", unique=true)} 
+	 * )
+	 */
+	private $tags;
+
 	/**
 	 * @ManyToOne(targetEntity="Status")
 	 * @JoinColumn(name="status_id", referencedColumnName="id")
@@ -65,6 +76,22 @@ final class Post
 	 * @Column(type="smallint")
 	 */
 	private $commentCount;
+
+	/**
+	 * @ManyToMany(targetEntity="Comment")
+	 * @JoinTable(
+	 * 		name="post_tags",
+	 * 		joinColumns={@JoinColumn(name="post_id", referencedColumnName="id")},
+	 *		inverseJoinColumns={@JoinColumn(name="comment_id", referencedColumnName="id", unique=true)} 
+	 * )
+	 */
+	private $comments;
+
+	public function __construct()
+	{
+		$this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->comments = new \Doctrine\Common\Collections\ArrayCollection();
+	}
 
     /**
      * Gets the value of id.
@@ -259,6 +286,30 @@ final class Post
     }
 
     /**
+     * Gets the name="post_tags",
+     *
+     * @return mixed
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+    
+    /**
+     * Sets the name="post_tags",
+     *
+     * @param mixed $tags the tags
+     *
+     * @return self
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+
+        return $this;
+    }
+
+    /**
      * Gets the value of status.
      *
      * @return mixed
@@ -326,6 +377,30 @@ final class Post
     public function setCommentCount($commentCount)
     {
         $this->commentCount = $commentCount;
+
+        return $this;
+    }
+
+    /**
+     * Gets the name="post_tags",
+     *
+     * @return mixed
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+    
+    /**
+     * Sets the name="post_tags",
+     *
+     * @param mixed $comments the comments
+     *
+     * @return self
+     */
+    public function setComments($comments)
+    {
+        $this->comments = $comments;
 
         return $this;
     }

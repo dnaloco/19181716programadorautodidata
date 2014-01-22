@@ -17,8 +17,6 @@ final class Tag
 	 */
 	private $tag;
 
-	
-
     /**
      * Gets the value of id.
      *
