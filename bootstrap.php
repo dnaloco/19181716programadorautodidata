@@ -3,7 +3,7 @@
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
 
-$configs = parse_ini_file('backend/app/configs.ini', true);
+$configs = parse_ini_file('backend/src/configs.ini', true);
 
 if((bool)$configs['isdev']) {
 	echo "<h6 style='margin:0'><i>Ambiente de Desenvolvimento</i></h6><hr style='margin:0'>";
