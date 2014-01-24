@@ -417,6 +417,61 @@
         ]
     },
     {
+        "name": "symfony/console",
+        "version": "v2.4.1",
+        "version_normalized": "2.4.1.0",
+        "target-dir": "Symfony/Component/Console",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/Console.git",
+            "reference": "4c1ed2ff514bd85ee186eebb010ccbdeeab05af7"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/Console/zipball/4c1ed2ff514bd85ee186eebb010ccbdeeab05af7",
+            "reference": "4c1ed2ff514bd85ee186eebb010ccbdeeab05af7",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "require-dev": {
+            "symfony/event-dispatcher": "~2.1"
+        },
+        "suggest": {
+            "symfony/event-dispatcher": ""
+        },
+        "time": "2014-01-01 08:14:50",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.4-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Symfony\\Component\\Console\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "http://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony Console Component",
+        "homepage": "http://symfony.com"
+    },
+    {
         "name": "doctrine/dbal",
         "version": "v2.4.1",
         "version_normalized": "2.4.1.0",
@@ -561,6 +616,205 @@
             "database",
             "orm"
         ]
+    },
+    {
+        "name": "respect/rest",
+        "version": "dev-develop",
+        "version_normalized": "dev-develop",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Respect/Rest.git",
+            "reference": "78ea9ffbe1051c302715a963a8a543b4514685a0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Respect/Rest/zipball/78ea9ffbe1051c302715a963a8a543b4514685a0",
+            "reference": "78ea9ffbe1051c302715a963a8a543b4514685a0",
+            "shasum": ""
+        },
+        "time": "2013-12-21 18:16:29",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "Respect\\Rest": "library/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Henrique Moody",
+                "email": "henriquemoody@gmail.com",
+                "homepage": "http://henriquemoody.com/"
+            },
+            {
+                "name": "Alexandre Gaigalas",
+                "email": "alexandre@gaigalas.net"
+            },
+            {
+                "name": "Augusto Pascutti",
+                "email": "contato@augustopascutti.com"
+            },
+            {
+                "name": "kleberhs007",
+                "email": "kleberhs007@yahoo.com"
+            },
+            {
+                "name": "Leandro",
+                "email": "lleitep3@gmail.com"
+            },
+            {
+                "name": "Rogerio Prado de Jesus",
+                "email": "rogeriopradoj@gmail.com"
+            },
+            {
+                "name": "Anderson Casimiro",
+                "email": "duodraco@duo.draco"
+            },
+            {
+                "name": "Ben Ramsey",
+                "email": "ben@benramsey.com"
+            },
+            {
+                "name": "eduardomarcate",
+                "email": "eduardo@marcate.info"
+            },
+            {
+                "name": "Eduardo M. Garcia",
+                "email": "eduardo@debian.elam"
+            },
+            {
+                "name": "Nick Rawe",
+                "email": "nickrawe2@gmail.com"
+            },
+            {
+                "name": "Pablo Lacerda de Miranda",
+                "email": "pablolmiranda@gmail.com"
+            },
+            {
+                "name": "wesleyvicthor",
+                "email": "w.v.mendes.s@gmail.com"
+            }
+        ],
+        "description": "Thin controller for RESTful applications"
+    },
+    {
+        "name": "respect/validation",
+        "version": "dev-develop",
+        "version_normalized": "dev-develop",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Respect/Validation.git",
+            "reference": "8308c6b81829baacf31b16dea1f4407baa8c6646"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Respect/Validation/zipball/8308c6b81829baacf31b16dea1f4407baa8c6646",
+            "reference": "8308c6b81829baacf31b16dea1f4407baa8c6646",
+            "shasum": ""
+        },
+        "require-dev": {
+            "symfony/validator": "2.*",
+            "zendframework/zend-validator": "2.*"
+        },
+        "suggest": {
+            "ext-bcmath": "*",
+            "ext-mbstring": "*"
+        },
+        "time": "2012-11-25 21:20:18",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "Respect\\Validation": "library/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD Style"
+        ],
+        "authors": [
+            {
+                "name": "Henrique Moody",
+                "email": "henriquemoody@gmail.com",
+                "homepage": "http://henriquemoody.com/"
+            },
+            {
+                "name": "Alexandre Gaigalas",
+                "email": "alexandre@gaigalas.net"
+            },
+            {
+                "name": "Carlos André Ferrari",
+                "email": "caferrari@gmail.com",
+                "homepage": "http://ferrari.eti.br/"
+            },
+            {
+                "name": "Devin Torres",
+                "email": "devin@devintorres.com"
+            },
+            {
+                "name": "Emerson Carvalho",
+                "email": "emerson.broga@gmail.com"
+            },
+            {
+                "name": "Fábio da Silva Ribeiro",
+                "email": "fabiorphp@gmail.com"
+            },
+            {
+                "name": "Jair Henrique",
+                "email": "jair.henrique@gmail.com"
+            },
+            {
+                "name": "Jayson Reis",
+                "email": "santosdosreis@gmail.com"
+            },
+            {
+                "name": "Jean Pimentel",
+                "email": "jeanfap@gmail.com"
+            },
+            {
+                "name": "Kleber Hamada Sato",
+                "email": "kleberhs007@yahoo.com"
+            },
+            {
+                "name": "Leandro",
+                "email": "lleitep3@gmail.com"
+            },
+            {
+                "name": "Marcelo Araujo",
+                "email": "msaraujo@php.net"
+            },
+            {
+                "name": "Michael Klishin",
+                "email": "michaelklishin@me.com"
+            },
+            {
+                "name": "Morf",
+                "email": "i@morfi.ru"
+            },
+            {
+                "name": "Rogerio Prado de Jesus",
+                "email": "rogeriopradoj@gmail.com"
+            },
+            {
+                "name": "Torben Brodt",
+                "email": "t.brodt@gmail.com"
+            },
+            {
+                "name": "Kinn Coelho Julião",
+                "email": "kinncj@gmail.com",
+                "homepage": "http://kinncj.com.br",
+                "role": "Developer"
+            },
+            {
+                "name": "Augusto Pascutti",
+                "email": "augusto@phpsp.org.br"
+            }
+        ],
+        "description": "The most awesome validation engine ever created for PHP"
     },
     {
         "name": "zendframework/zend-stdlib",
@@ -1056,6 +1310,102 @@
         ]
     },
     {
+        "name": "mustache/mustache",
+        "version": "v2.5.1",
+        "version_normalized": "2.5.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/bobthecow/mustache.php.git",
+            "reference": "996c944fa2ddedddfaf0d276b913809d6a32fd85"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/bobthecow/mustache.php/zipball/996c944fa2ddedddfaf0d276b913809d6a32fd85",
+            "reference": "996c944fa2ddedddfaf0d276b913809d6a32fd85",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.2.4"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "*"
+        },
+        "time": "2014-01-09 00:36:09",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Mustache": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Justin Hileman",
+                "email": "justin@justinhileman.info",
+                "homepage": "http://justinhileman.com"
+            }
+        ],
+        "description": "A Mustache implementation in PHP.",
+        "homepage": "https://github.com/bobthecow/mustache.php",
+        "keywords": [
+            "mustache",
+            "templating"
+        ]
+    },
+    {
+        "name": "symfony/yaml",
+        "version": "v2.4.1",
+        "version_normalized": "2.4.1.0",
+        "target-dir": "Symfony/Component/Yaml",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/Yaml.git",
+            "reference": "4e1a237fc48145fae114b96458d799746ad89aa0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/Yaml/zipball/4e1a237fc48145fae114b96458d799746ad89aa0",
+            "reference": "4e1a237fc48145fae114b96458d799746ad89aa0",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "time": "2013-12-28 08:12:03",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.4-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Symfony\\Component\\Yaml\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "http://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony Yaml Component",
+        "homepage": "http://symfony.com"
+    },
+    {
         "name": "phpunit/php-text-template",
         "version": "1.1.4",
         "version_normalized": "1.1.4.0",
@@ -1361,241 +1711,6 @@
         ]
     },
     {
-        "name": "mustache/mustache",
-        "version": "v2.5.1",
-        "version_normalized": "2.5.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/bobthecow/mustache.php.git",
-            "reference": "996c944fa2ddedddfaf0d276b913809d6a32fd85"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/bobthecow/mustache.php/zipball/996c944fa2ddedddfaf0d276b913809d6a32fd85",
-            "reference": "996c944fa2ddedddfaf0d276b913809d6a32fd85",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.2.4"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "*"
-        },
-        "time": "2014-01-09 00:36:09",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Mustache": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Justin Hileman",
-                "email": "justin@justinhileman.info",
-                "homepage": "http://justinhileman.com"
-            }
-        ],
-        "description": "A Mustache implementation in PHP.",
-        "homepage": "https://github.com/bobthecow/mustache.php",
-        "keywords": [
-            "mustache",
-            "templating"
-        ]
-    },
-    {
-        "name": "symfony/console",
-        "version": "v2.4.1",
-        "version_normalized": "2.4.1.0",
-        "target-dir": "Symfony/Component/Console",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/Console.git",
-            "reference": "4c1ed2ff514bd85ee186eebb010ccbdeeab05af7"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/Console/zipball/4c1ed2ff514bd85ee186eebb010ccbdeeab05af7",
-            "reference": "4c1ed2ff514bd85ee186eebb010ccbdeeab05af7",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3"
-        },
-        "require-dev": {
-            "symfony/event-dispatcher": "~2.1"
-        },
-        "suggest": {
-            "symfony/event-dispatcher": ""
-        },
-        "time": "2014-01-01 08:14:50",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.4-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Symfony\\Component\\Console\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "http://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony Console Component",
-        "homepage": "http://symfony.com"
-    },
-    {
-        "name": "symfony/yaml",
-        "version": "v2.4.1",
-        "version_normalized": "2.4.1.0",
-        "target-dir": "Symfony/Component/Yaml",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/Yaml.git",
-            "reference": "4e1a237fc48145fae114b96458d799746ad89aa0"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/Yaml/zipball/4e1a237fc48145fae114b96458d799746ad89aa0",
-            "reference": "4e1a237fc48145fae114b96458d799746ad89aa0",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3"
-        },
-        "time": "2013-12-28 08:12:03",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.4-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Symfony\\Component\\Yaml\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "http://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony Yaml Component",
-        "homepage": "http://symfony.com"
-    },
-    {
-        "name": "respect/rest",
-        "version": "dev-develop",
-        "version_normalized": "dev-develop",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/Respect/Rest.git",
-            "reference": "78ea9ffbe1051c302715a963a8a543b4514685a0"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/Respect/Rest/zipball/78ea9ffbe1051c302715a963a8a543b4514685a0",
-            "reference": "78ea9ffbe1051c302715a963a8a543b4514685a0",
-            "shasum": ""
-        },
-        "time": "2013-12-21 18:16:29",
-        "type": "library",
-        "installation-source": "source",
-        "autoload": {
-            "psr-0": {
-                "Respect\\Rest": "library/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Henrique Moody",
-                "email": "henriquemoody@gmail.com",
-                "homepage": "http://henriquemoody.com/"
-            },
-            {
-                "name": "Alexandre Gaigalas",
-                "email": "alexandre@gaigalas.net"
-            },
-            {
-                "name": "Augusto Pascutti",
-                "email": "contato@augustopascutti.com"
-            },
-            {
-                "name": "kleberhs007",
-                "email": "kleberhs007@yahoo.com"
-            },
-            {
-                "name": "Leandro",
-                "email": "lleitep3@gmail.com"
-            },
-            {
-                "name": "Rogerio Prado de Jesus",
-                "email": "rogeriopradoj@gmail.com"
-            },
-            {
-                "name": "Anderson Casimiro",
-                "email": "duodraco@duo.draco"
-            },
-            {
-                "name": "Ben Ramsey",
-                "email": "ben@benramsey.com"
-            },
-            {
-                "name": "eduardomarcate",
-                "email": "eduardo@marcate.info"
-            },
-            {
-                "name": "Eduardo M. Garcia",
-                "email": "eduardo@debian.elam"
-            },
-            {
-                "name": "Nick Rawe",
-                "email": "nickrawe2@gmail.com"
-            },
-            {
-                "name": "Pablo Lacerda de Miranda",
-                "email": "pablolmiranda@gmail.com"
-            },
-            {
-                "name": "wesleyvicthor",
-                "email": "w.v.mendes.s@gmail.com"
-            }
-        ],
-        "description": "Thin controller for RESTful applications"
-    },
-    {
         "name": "phpunit/phpunit",
         "version": "3.7.29",
         "version_normalized": "3.7.29.0",
@@ -1670,120 +1785,5 @@
             "testing",
             "xunit"
         ]
-    },
-    {
-        "name": "respect/validation",
-        "version": "dev-develop",
-        "version_normalized": "dev-develop",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/Respect/Validation.git",
-            "reference": "8308c6b81829baacf31b16dea1f4407baa8c6646"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/Respect/Validation/zipball/8308c6b81829baacf31b16dea1f4407baa8c6646",
-            "reference": "8308c6b81829baacf31b16dea1f4407baa8c6646",
-            "shasum": ""
-        },
-        "require-dev": {
-            "symfony/validator": "2.*",
-            "zendframework/zend-validator": "2.*"
-        },
-        "suggest": {
-            "ext-bcmath": "*",
-            "ext-mbstring": "*"
-        },
-        "time": "2012-11-25 21:20:18",
-        "type": "library",
-        "installation-source": "source",
-        "autoload": {
-            "psr-0": {
-                "Respect\\Validation": "library/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD Style"
-        ],
-        "authors": [
-            {
-                "name": "Henrique Moody",
-                "email": "henriquemoody@gmail.com",
-                "homepage": "http://henriquemoody.com/"
-            },
-            {
-                "name": "Alexandre Gaigalas",
-                "email": "alexandre@gaigalas.net"
-            },
-            {
-                "name": "Carlos André Ferrari",
-                "email": "caferrari@gmail.com",
-                "homepage": "http://ferrari.eti.br/"
-            },
-            {
-                "name": "Devin Torres",
-                "email": "devin@devintorres.com"
-            },
-            {
-                "name": "Emerson Carvalho",
-                "email": "emerson.broga@gmail.com"
-            },
-            {
-                "name": "Fábio da Silva Ribeiro",
-                "email": "fabiorphp@gmail.com"
-            },
-            {
-                "name": "Jair Henrique",
-                "email": "jair.henrique@gmail.com"
-            },
-            {
-                "name": "Jayson Reis",
-                "email": "santosdosreis@gmail.com"
-            },
-            {
-                "name": "Jean Pimentel",
-                "email": "jeanfap@gmail.com"
-            },
-            {
-                "name": "Kleber Hamada Sato",
-                "email": "kleberhs007@yahoo.com"
-            },
-            {
-                "name": "Leandro",
-                "email": "lleitep3@gmail.com"
-            },
-            {
-                "name": "Marcelo Araujo",
-                "email": "msaraujo@php.net"
-            },
-            {
-                "name": "Michael Klishin",
-                "email": "michaelklishin@me.com"
-            },
-            {
-                "name": "Morf",
-                "email": "i@morfi.ru"
-            },
-            {
-                "name": "Rogerio Prado de Jesus",
-                "email": "rogeriopradoj@gmail.com"
-            },
-            {
-                "name": "Torben Brodt",
-                "email": "t.brodt@gmail.com"
-            },
-            {
-                "name": "Kinn Coelho Julião",
-                "email": "kinncj@gmail.com",
-                "homepage": "http://kinncj.com.br",
-                "role": "Developer"
-            },
-            {
-                "name": "Augusto Pascutti",
-                "email": "augusto@phpsp.org.br"
-            }
-        ],
-        "description": "The most awesome validation engine ever created for PHP"
     }
 ]

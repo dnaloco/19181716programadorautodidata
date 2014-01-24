@@ -7,6 +7,8 @@ use Base\Helpers\DataTypeHelper as data;
 abstract class ControllerRoutable implements Routable
 {
   protected static $model;
+
+  abstract public function __construct ($em)
   
   public function get ($id = NULL)
   {

@@ -3,15 +3,11 @@ BlogApp.config(
 	function ($routeProvider) {
 		$routeProvider.
 		when('/', {
-			templateUrl: '/frontend/partials/home.html',
+			templateUrl: '/frontend/partials/blog/home.html',
 			controller: 'BlogCtrl'
 		})
 		.when('/post/:postId', {
-			templateUrl: '/frontend/partials/post-view.html',
-			controller: 'PostCtrl'
-		})
-		.when('/post-form/:postId', {
-			templateUrl: '/frontend/partials/post-form.html',
+			templateUrl: '/frontend/partials//blogpost-view.html',
 			controller: 'PostCtrl'
 		})
 		.otherwise({

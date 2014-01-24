@@ -54,24 +54,27 @@ abstract class ModelBase
 
     public function save ($data)
     {
-        $entity = new static::$_entity();
-        $entity = self::$hydrator->hydrate($data, $entity);
-        self::$em->persist($entity);
+        $objectEntity = new static::$_entity();
+        $objectEntity = self::$hydrator->hydrate($data, $objectEntity);
+        self::$em->persist($objectEntity);
         self::$em->flush();
+        return $objectEntity;
     }
 
     public function update ($id, $data)
     {
-        $entity = self::$em->find(static::$_entity, $id);
-        $entity = self::$hydrator->hydrate($data, $entity);
-        self::$em->persist($entity);
+        $objectEntity = self::$em->find(static::$_entity, $id);
+        $objectEntity = self::$hydrator->hydrate($data, $objectEntity);
+        self::$em->persist($objectEntity);
         self::$em->flush();
+        return $objectEntity;
     }
 
     public function delete ($id)
     {
-        $entity = self::$em->find(static::$_entity, $id);
-        self::$em->remove($entity);
+        $objectEntity = self::$em->find(static::$_entity, $id);
+        self::$em->remove($objectEntity);
         self::$em->flush();
+        return $objectEntity;
     }
 }

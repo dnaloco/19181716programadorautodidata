@@ -1,7 +1,7 @@
 BlogApp.directive('homeBanner',
 	function () {
 		return {
-			templateUrl: '/frontend/partials/directives/banner-home.html',
+			templateUrl: '/frontend/partials/blog/directives/banner-home.html',
 			link: function (scope, element, attrs) {
 				$(document).foundation({
 					orbit: {

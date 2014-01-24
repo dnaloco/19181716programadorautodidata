@@ -6,6 +6,10 @@ use Base\Helpers\RenderHelper as render;
 
 $router = new Router('/index.php/');
 
+$router->get('/admin', function () {
+	return 'Admin';
+});
+
 $router->get(['/*', '/post/*', '/post-form/*'], function ($id = NULL) {
 	$data = array(
 		'site' => 'Programador Autodidata'
