@@ -44,6 +44,7 @@ abstract class ModelBase
         $qb = self::$em->createQueryBuilder();
         $qb->select('e')->from(static::$_entity, 'e');
         if (is_numeric($id)) {
+            // TODO - Verificar antes se existe o id!
             $qb->where('e.id = ' . $id);   
         } else {
             $qb->where('e.id = 0');
@@ -60,8 +61,8 @@ abstract class ModelBase
         try {
             self::$em->persist($objectEntity);
             self::$em->flush();
-        } catch(Exception $e) {
-            return $e;
+        } catch(\Doctrine\DBAL\DBALException $e) {
+            return $e->getMessage();
         }
 
         return $objectEntity;
