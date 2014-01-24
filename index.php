@@ -20,6 +20,11 @@ $router->get(['/*', '/post/*', '/post-form/*'], function ($id = NULL) {
 	return render::renderHtml(array('layout'=>'default-index.html'), $data);
 });
 
+$router->any('/rest/status/*', 'Blog\Controllers\StatusController', array($em))
+->accept(array(
+		'application/json' => 'json_encode'
+	));
+
 /*$router->any('/rest/post/*', 'Blog\Controllers\BlogController', array($em))
 ->accept(array(
 		'text/html' => function ($data) {

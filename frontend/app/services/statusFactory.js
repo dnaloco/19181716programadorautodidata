@@ -1,4 +1,4 @@
-AdminApp.factory('statusFatory',
+AdminApp.factory('statusFactory',
 	['$http',
 	function ($http) {
 		var url = '/rest/status/';

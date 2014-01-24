@@ -16,7 +16,7 @@ abstract class ModelBase
         self::$hydrator = new DoctrineHydrator($em, static::$_entity);
     }
 
-    public function getEntities (Array $options)
+    public function getEntities ($options = array())
     {
         $qb = self::$em->createQueryBuilder();
         $qb->select('e')

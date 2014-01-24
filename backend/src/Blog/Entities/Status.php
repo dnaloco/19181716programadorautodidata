@@ -17,6 +17,9 @@ final class Status
 	 */
 	private $status;
 
+    /**
+     * @Column(length=2, unique=true)
+     */
     private $type;
 
     /**

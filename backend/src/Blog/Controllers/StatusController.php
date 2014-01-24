@@ -2,7 +2,7 @@
 namespace Blog\Controllers;
 
 use Base\Core\ControllerRoutable,
-	Blog\Model\StatusModel;
+	Blog\Models\StatusModel;
 
 final class StatusController extends ControllerRoutable
 {
