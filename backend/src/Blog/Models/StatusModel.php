@@ -17,20 +17,32 @@ final class StatusModel extends ModelBase
 		return $this->statusArray($status);
 	}
 
+	public function update($id, $data)
+	{
+		$status = parent::update($id, $data);
+		return $this->statusArray($status);
+	}
+
+	public function delete($id)
+	{
+		$status = parent::delete($id);
+		return $this->statusArray($status);
+	}
+
 	public function statusArray ($status)
 	{
 		if (is_string($status)) {
 			return array(
 				'error' => $status
 				);
-		} else if ($status instanceof Status) {
+		} else if ($status instanceof \Blog\Entities\Status) {
 			return array(
 				'id' => $status->getId(),
 				'status' => $status->getStatus(),
 				'type' => $status->getType()
 				);
 		} else {
-			return null;
+			return $status;
 		}
 	}
 }

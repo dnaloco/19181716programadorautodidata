@@ -72,16 +72,29 @@ abstract class ModelBase
     {
         $objectEntity = self::$em->find(static::$_entity, $id);
         $objectEntity = self::$hydrator->hydrate($data, $objectEntity);
-        self::$em->persist($objectEntity);
-        self::$em->flush();
+
+        try {
+            self::$em->persist($objectEntity);
+            self::$em->flush();
+        } catch (\Doctrine\ORM\ORMInvalidArgumentException $e) {
+            return $e->getMessage();
+        }
+        
+        
         return $objectEntity;
     }
 
     public function delete ($id)
     {
         $objectEntity = self::$em->find(static::$_entity, $id);
-        self::$em->remove($objectEntity);
-        self::$em->flush();
+
+        try {
+            self::$em->remove($objectEntity);
+            self::$em->flush();
+        } catch (\Doctrine\ORM\ORMInvalidArgumentException $e) {
+            return $e->getMessage();
+        }
+
         return $objectEntity;
     }
 }

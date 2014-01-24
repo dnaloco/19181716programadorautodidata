@@ -1,13 +1,6 @@
 <?php
 require 'bootstrap.php';
 
-$status = new Blog\Models\StatusModel($em);
-$data = $status->save(array('status'=>'published', 'type'=>'p'));
-
-var_dump($data);
-
-die('young');
-
 use Respect\Rest\Router;
 use Base\Helpers\RenderHelper as render;
 
