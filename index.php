@@ -1,6 +1,8 @@
 <?php
 require 'bootstrap.php';
 
+die('young');
+
 use Respect\Rest\Router;
 use Base\Helpers\RenderHelper as render;
 

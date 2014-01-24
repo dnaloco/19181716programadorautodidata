@@ -7,7 +7,7 @@ final class CategoryModel extends ModelBase
 {
 	public function __construct($em)
 	{
-		parent::__construct($em);
 		self::$_entity = 'Blog\Entities\Category';
+		parent::__construct($em);		
 	}
 }

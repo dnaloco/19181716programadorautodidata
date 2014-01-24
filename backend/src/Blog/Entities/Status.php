@@ -13,7 +13,7 @@ final class Status
 	private $id;
 
 	/**
-	 * @Column(length=15)
+	 * @Column(length=15, unique=true)
 	 */
 	private $status;
 

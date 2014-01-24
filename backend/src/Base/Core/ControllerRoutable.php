@@ -24,17 +24,20 @@ abstract class ControllerRoutable implements Routable
   public function post ()
   {
       $post = data::getInput();
-      $objectEntity = static::$model->save($post);
+      $entity = static::$model->save($post);
+      return $entity;
   }
 
   public function put ($id)
   {
       $put = data::getInput();
-      $objectEntity = static::$model->update((int)$id, $put);
+      $entity = static::$model->update((int)$id, $put);
+      return $entity;
   }
 
   public function delete ($id)
   {
-      $objectEntity = static::$model->delete((int)$id);
+      $entity = static::$model->delete((int)$id);
+      return $entity;
   }
 }

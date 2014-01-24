@@ -56,8 +56,14 @@ abstract class ModelBase
     {
         $objectEntity = new static::$_entity();
         $objectEntity = self::$hydrator->hydrate($data, $objectEntity);
-        self::$em->persist($objectEntity);
-        self::$em->flush();
+        
+        try {
+            self::$em->persist($objectEntity);
+            self::$em->flush();
+        } catch(Exception $e) {
+            return $e;
+        }
+
         return $objectEntity;
     }
 

@@ -7,7 +7,7 @@ final class GroupModel extends ModelBase
 {
 	public function __construct($em)
 	{
-		parent::__construct($em);
 		self::$_entity = 'Blog\Entities\Group';
+		parent::__construct($em);		
 	}
 }
