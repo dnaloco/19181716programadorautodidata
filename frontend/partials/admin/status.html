@@ -1,15 +1,20 @@
 <div>
 	<h3>Status</h3>
-	<div data-ng-repeat="s in status">
-		<p>
-			[[s.id]] | [[s.status]] | [[s.type]]
+	<div data-ng-repeat="s in status" ng-click="hideEditMode()">
+		<p ng-click="toggleEditMode($event)">
+			[editar] [[s.id]] | [[s.status]] | [[s.type]]
+		
 		</p>
+
+		
 	</div>
 
 	<form>
 		<label for="status">Status:</label>
 		<input type="text" data-ng-model="new.status.name">
+
 		<label for="type">Type:</label>
+    <!--   	<select ng-model="new.status.type" ng-options="t.name for t in types"></select><br> -->
 		<select data-ng-model="new.status.type">
 			<option value="">-- choose type --</option>
 			<option value="[[t.abr]]" data-ng-repeat="t in types">[[t.name]]</option>

@@ -3,6 +3,8 @@ AdminApp.controller('StatusCtrl',
 	function ($scope, status) {
 		var statusObj = {};
 
+		$scope.showEditMode = false;
+
 		$scope.types =[
 			{name: 'Post Status', abr: 'p'},
 			{name: 'User Status', abr: 'u'},
@@ -19,4 +21,13 @@ AdminApp.controller('StatusCtrl',
 				statusObj.push(data);
 			});
 		};
+
+		$scope.hideEditMode = function () {
+			$scope.showEditMode = false;
+		}
+
+		$scope.toggleEditMode = function (e) {
+			e.stopPropagation();
+			$scope.showEditMode = !$scope.showEditMode;
+		}
 	}]);	
