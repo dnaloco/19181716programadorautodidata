@@ -1,8 +1,8 @@
 BlogApp.config(
 	['$routeProvider',
 	function ($routeProvider) {
-		$routeProvider.
-		when('/', {
+		$routeProvider
+		.when('/', {
 			templateUrl: '/frontend/partials/blog/home.html',
 			controller: 'BlogCtrl'
 		})

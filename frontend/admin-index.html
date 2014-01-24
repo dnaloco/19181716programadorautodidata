@@ -1,0 +1,27 @@
+<!doctype html>
+
+<html lang="en">
+
+{{>layouts/admin/admin-head}}
+
+<body data-ng-app="AdminApp">
+
+	{{>layouts/admin/admin-menu}}
+
+	<div class="row">
+		{{>layouts/admin/admin-header}}
+	</div>
+
+	<section class="row" id="partial-content">
+		<div data-ng-view></div>
+	</section>
+
+	<div class="row">
+		{{>layouts/admin/admin-footer}}
+	</div>
+
+	{{>layouts/admin/admin-scripts}}
+
+</body>
+
+</html>
