@@ -8,7 +8,7 @@ abstract class ControllerRoutable implements Routable
 {
   protected static $model;
 
-  abstract public function __construct ($em)
+  abstract public function __construct ($em);
   
   public function get ($id = NULL)
   {

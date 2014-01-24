@@ -17,6 +17,8 @@ final class Status
 	 */
 	private $status;
 
+    private $type;
+
     /**
      * Gets the value of id.
      *
@@ -62,6 +64,17 @@ final class Status
     {
         $this->status = $status;
 
+        return $this;
+    }
+
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    public function setType($type)
+    {
+        $this->type = $type;
         return $this;
     }
 }
