@@ -8,10 +8,10 @@ AdminApp.factory('statusFactory',
 				return $http.get(url);
 			},
 			add: function (status) {
-				return $http.post(url, {'status': status});
+				return $http.post(url, {'status': status.name, 'type': status.type});
 			},
 			save: function (id, status) {
-				return $http.put(url + id, {'status': status});
+				return $http.put(url + id, {'status': status.name, 'type': status.type});
 			},
 			delete: function (id){
 				return $http.delete(url + id);

@@ -8,9 +8,9 @@
 
 	<form>
 		<label for="status">Status:</label>
-		<input type="text" data-ng-model="new.status">
+		<input type="text" data-ng-model="new.status.name">
 		<label for="type">Type:</label>
-		<select data-ng-model="new.type">
+		<select data-ng-model="new.status.type">
 			<option value="">-- choose type --</option>
 			<option value="[[t.abr]]" data-ng-repeat="t in types">[[t.name]]</option>
 		</select>

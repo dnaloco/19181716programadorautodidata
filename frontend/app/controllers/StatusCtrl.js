@@ -5,7 +5,8 @@ AdminApp.controller('StatusCtrl',
 
 		$scope.types =[
 			{name: 'Post Status', abr: 'p'},
-			{name: 'User Status', abr: 'u'}
+			{name: 'User Status', abr: 'u'},
+			{name: 'Both Status', abr: 'b'},
 		];
 		
 		status.getAll().success(function (data) {
@@ -14,7 +15,7 @@ AdminApp.controller('StatusCtrl',
 		});
 
 		$scope.newStatus = function () {
-			status.post($scope.new.status).success(function (data) {
+			status.add($scope.new.status).success(function (data) {
 				statusObj.push(data);
 			});
 		};
