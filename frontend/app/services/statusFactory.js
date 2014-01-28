@@ -5,7 +5,10 @@ AdminApp.factory('statusFactory',
 
 		return {
 			getAll: function () {
-				return $http.get(url);
+				return $http.get(url, {cache: false});
+			},
+			getId: function (id) {
+				return $http.get(url + id, {cache: false});	
 			},
 			add: function (status) {
 				return $http.post(url, {'status': status.name, 'type': status.type});

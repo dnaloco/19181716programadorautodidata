@@ -1,0 +1,45 @@
+<div>
+	<div id="editStatus" class="reveal-modal small" data-reveal>
+		<label for="editStatus">Status:</label>
+		<input type="text" ng-model="edited.name"><br>
+		<label for="editType">Type:</label>
+		<select data-ng-options="t.name for t in types" data-ng-model="edited.type">
+		</select>
+		<button ng-click="save(id, edited)"></button>
+		<a class="close-reveal-modal">&#215;</a>
+	</div>
+	
+	<div id="deleteStatus" class="reveal-modal small" data-reveal>
+<!-- 		<label for="editStatus">Status:</label>
+<input type="text" ng-model="edited.name"><br>
+<label for="editType">Type:</label>
+<select data-ng-options="t.name for t in types" data-ng-model="edited.type">
+</select>
+<button ng-click="save(id, edited)"></button> -->
+		<a class="close-reveal-modal">&#215;</a>
+	</div>
+
+	<div data-ng-repeat="s in status">
+
+		<p ng-click="editionBox($event)">
+			[[s.id]] | [[s.status]] | [[s.type]] |
+			<button ng-click="edit(s)">Edit</button>
+			<button ng-click="delete(s.id)">Delete</button>
+		</p>
+
+	</div>
+
+	<form>
+		<label for="status">Status:</label>
+		<input type="text" data-ng-model="new.status.name">
+
+		<label for="type">Type:</label>
+    <!--   	<select ng-model="new.status.type" ng-options="t.name for t in types"></select><br> -->
+		<select data-ng-model="new.status.type">
+			<option value="">-- choose type --</option>
+			<option value="[[t.abr]]" data-ng-repeat="t in types">[[t.name]]</option>
+		</select>
+
+		<button type="submit" ng-click="newStatus()">Novo</button>
+	</form>
+</div>

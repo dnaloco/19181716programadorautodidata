@@ -22,12 +22,4 @@ AdminApp.controller('StatusCtrl',
 			});
 		};
 
-		$scope.hideEditMode = function () {
-			$scope.showEditMode = false;
-		}
-
-		$scope.toggleEditMode = function (e) {
-			e.stopPropagation();
-			$scope.showEditMode = !$scope.showEditMode;
-		}
 	}]);	
