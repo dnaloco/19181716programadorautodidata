@@ -4,7 +4,7 @@ AdminApp.directive('statusList',
 		return {
 			templateUrl: '/frontend/partials/admin/directives/status-list.html',
 			link: function (scope, element, attrs) {
-				$(document).foundation();
+				angular.element(document).foundation();
 
 				scope.edit = function (s) {
 					var select;

@@ -52,8 +52,24 @@ final class GroupModel extends ModelBase
 
 	public function update($id, $data)
 	{
-	    $group = parent::update($id, $data);
-	    return $this->groupArray($group);
+        $groupEntity = self:: $em->find(static::$_entity, $id);
+
+        if($data['permissions']) {
+        	$groupEntity->getPermissions()->clear();
+        	foreach($data['permissions'] as $id) {
+        		$p = self::$em->find('Blog\Entities\Permission', $id);
+        		try {
+        			$groupEntity->getPermissions()->add($p);
+	        		self::$em->persist($groupEntity);
+	            	self::$em->flush();	
+        		} catch (Exception $e) {
+        			return $e->getMessage();
+        		}
+        		
+        	}
+        }
+
+	    return $this->groupArray($groupEntity);
 	}
 
 	public function delete($id)

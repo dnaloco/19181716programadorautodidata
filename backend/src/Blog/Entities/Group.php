@@ -22,7 +22,7 @@ final class Group
 	 * @JoinTable(
 	 * 		name="group_permissions",
 	 * 		joinColumns={@JoinColumn(name="group_id", referencedColumnName="id")},
-	 *		inverseJoinColumns={@JoinColumn(name="permission_id", referencedColumnName="id", unique=true)} 
+	 *		inverseJoinColumns={@JoinColumn(name="permission_id", referencedColumnName="id")} 
 	 * )
 	 */
 	private $permissions;
