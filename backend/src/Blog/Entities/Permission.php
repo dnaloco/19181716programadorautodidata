@@ -13,7 +13,7 @@ final class Permission
 	private $id;
 
 	/**
-	 * @Column(length=20)
+	 * @Column(length=20, unique=true)
 	 */
 	private $permission;
 

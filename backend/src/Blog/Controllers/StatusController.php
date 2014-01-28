@@ -9,5 +9,5 @@ final class StatusController extends ControllerRoutable
 	public function __construct ($em)
 	{
 		self::$model = new StatusModel($em);
-	}	
+	}
 }

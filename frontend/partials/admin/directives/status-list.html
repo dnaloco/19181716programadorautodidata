@@ -1,21 +1,19 @@
 <div>
 	<div id="editStatus" class="reveal-modal small" data-reveal>
 		<label for="editStatus">Status:</label>
-		<input type="text" ng-model="edited.name"><br>
+		<input type="text" ng-model="edited.status"><br>
 		<label for="editType">Type:</label>
 		<select data-ng-options="t.name for t in types" data-ng-model="edited.type">
 		</select>
-		<button ng-click="save(id, edited)"></button>
+		<button ng-click="save(id, edited)">Salvar</button>
+		<button ng-click="cancelar()">Cancelar</button>
 		<a class="close-reveal-modal">&#215;</a>
 	</div>
 	
 	<div id="deleteStatus" class="reveal-modal small" data-reveal>
-<!-- 		<label for="editStatus">Status:</label>
-<input type="text" ng-model="edited.name"><br>
-<label for="editType">Type:</label>
-<select data-ng-options="t.name for t in types" data-ng-model="edited.type">
-</select>
-<button ng-click="save(id, edited)"></button> -->
+		Você tem certeza de que deseja excluir o [[id]]?
+		<button ng-click="excluir(id)">Excluir</button>
+		<button ng-click="cancelar()">Cancelar</button>
 		<a class="close-reveal-modal">&#215;</a>
 	</div>
 
@@ -31,11 +29,10 @@
 
 	<form>
 		<label for="status">Status:</label>
-		<input type="text" data-ng-model="new.status.name">
+		<input type="text" data-ng-model="new.status.status" required>
 
 		<label for="type">Type:</label>
-    <!--   	<select ng-model="new.status.type" ng-options="t.name for t in types"></select><br> -->
-		<select data-ng-model="new.status.type">
+		<select data-ng-model="new.status.type" required>
 			<option value="">-- choose type --</option>
 			<option value="[[t.abr]]" data-ng-repeat="t in types">[[t.name]]</option>
 		</select>

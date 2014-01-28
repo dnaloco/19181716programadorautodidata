@@ -13,7 +13,7 @@ final class Group
 	private $id;
 
 	/**
-	 * @Column(length=20)
+	 * @Column(length=20, unique=true)
 	 */
 	private $name;
 
@@ -26,6 +26,11 @@ final class Group
 	 * )
 	 */
 	private $permissions;
+
+    public function __construct()
+    {
+        $this->permissions = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Gets the value of id.

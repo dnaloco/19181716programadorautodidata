@@ -10,6 +10,10 @@ AdminApp.config(
 			templateUrl: '/frontend/partials/admin/status.html',
 			controller: 'StatusCtrl'
 		})
+		.when('/admin/groups', {
+			templateUrl: '/frontend/partials/admin/groups.html',
+			controller: 'GroupsCtrl'
+		})
 		.otherwise({
 			redirectTo: '/admin'
 		});

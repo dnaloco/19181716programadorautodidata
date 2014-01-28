@@ -5,7 +5,7 @@ use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 
 abstract class ModelBase
 {
-    private static $em;
+    protected static $em;
     private static $hydrator;
     private $filter;
     protected static $_entity;
@@ -22,35 +22,34 @@ abstract class ModelBase
         $qb->select('e')
             ->from(static::$_entity, 'e');
 
-        if(array_key_exists('offset', $options)) {
+        if (array_key_exists('offset', $options)) {
             $qb->setFirstResult($options['offset']);
         }
 
-        if(array_key_exists('limit', $options)) {
+        if (array_key_exists('limit', $options)) {
             $qb->setMaxResults($options['limit']);
         }
         
-        if(array_key_exists('orderby', $options)) {
+        if (array_key_exists('orderby', $options)) {
             $qb->orderBy('e' . '.' . $options['orderby']);
         }
-        
-        $entities = self::$em->createQuery($qb)->getArrayResult();
 
-        return $entities;
+        return self::$em->createQuery($qb)->getArrayResult();
     }
 
     public function getEntity ($id)
     {
         $qb = self::$em->createQueryBuilder();
         $qb->select('e')->from(static::$_entity, 'e');
+        
         if (is_numeric($id)) {
             // TODO - Verificar antes se existe o id!
             $qb->where('e.id = ' . $id);   
         } else {
             $qb->where('e.id = 0');
         }
-        $entity = self::$em->createQuery($qb)->getArrayResult();
-        return $entity;
+
+        return self::$em->createQuery($qb)->getArrayResult()[0];
     }
 
     public function save ($data)
@@ -70,6 +69,7 @@ abstract class ModelBase
 
     public function update ($id, $data)
     {
+
         $objectEntity = self::$em->find(static::$_entity, $id);
         $objectEntity = self::$hydrator->hydrate($data, $objectEntity);
 
@@ -79,7 +79,6 @@ abstract class ModelBase
         } catch (\Doctrine\ORM\ORMInvalidArgumentException $e) {
             return $e->getMessage();
         }
-        
         
         return $objectEntity;
     }

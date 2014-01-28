@@ -24,27 +24,50 @@ AdminApp.directive('statusList',
 
 					scope.id = s.id;
 
-					scope.edited.name = s.status;
+					scope.edited.status = s.status;
 					scope.edited.type = scope.types[select];
 
 					angular.element('#editStatus').foundation('reveal', 'open');
 				};
 
 				scope.save = function (id, edited)  {
-					var i, len;
 					edited.type = edited.type.abr;
-
+					console.log(edited);
 					status.save(id, edited).success(function(data) {
-						for(i = 0, len = scope.status.length; i < len; i += 1) {
-							if(scope.status[i].id === id) {
-								scope.status[i] = data;
-							}
+						console.log(data);
+						if (data.error) {
+							console.log(data.error);
+						} else {
+							scope.updateList();
 						}
-					});
-
+					}).error(function (data) {
+						console.log(data);
+					})
 
 					angular.element('#editStatus').foundation('reveal', 'close');
 				};
+
+				scope.delete = function (id) {
+					console.log(id);
+					scope.id = id;
+					angular.element('#deleteStatus').foundation('reveal', 'open');
+				}
+
+				scope.excluir = function (id) {
+					status.delete(id).success(function (data) {
+						if (data.error) {
+							console.log(data.error);
+						} else {
+							scope.updateList();
+						}
+						angular.element('#deleteStatus').foundation('reveal', 'close');	
+					})
+				}
+
+				scope.cancelar = function () {
+					angular.element('#deleteStatus').foundation('reveal', 'close');
+					angular.element('#editStatus').foundation('reveal', 'close');	
+				}
 			}
 		};
 	}]);

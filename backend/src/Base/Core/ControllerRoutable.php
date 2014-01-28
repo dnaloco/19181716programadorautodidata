@@ -15,7 +15,7 @@ abstract class ControllerRoutable implements Routable
       if (NULL === $id) {
           $entities = static::$model->getEntities();       
       } else {
-          $entities = static::$model->getEntity($id)[0];
+          $entities = static::$model->getEntity($id);
       }
 
       return $entities;

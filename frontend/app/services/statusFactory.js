@@ -11,10 +11,10 @@ AdminApp.factory('statusFactory',
 				return $http.get(url + id, {cache: false});	
 			},
 			add: function (status) {
-				return $http.post(url, {'status': status.name, 'type': status.type});
+				return $http.post(url, status);
 			},
 			save: function (id, status) {
-				return $http.put(url + id, {'status': status.name, 'type': status.type});
+				return $http.put(url + id, status);
 			},
 			delete: function (id){
 				return $http.delete(url + id);

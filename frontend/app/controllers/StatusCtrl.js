@@ -3,23 +3,30 @@ AdminApp.controller('StatusCtrl',
 	function ($scope, status) {
 		var statusObj = {};
 
-		$scope.showEditMode = false;
-
 		$scope.types =[
 			{name: 'Post Status', abr: 'p'},
 			{name: 'User Status', abr: 'u'},
 			{name: 'Both Status', abr: 'b'},
 		];
-		
-		status.getAll().success(function (data) {
-			statusObj = data;
-			$scope.status = statusObj;
-		});
 
 		$scope.newStatus = function () {
 			status.add($scope.new.status).success(function (data) {
-				statusObj.push(data);
+				if (data.error) {
+					if (data.error.search('Duplicate entry') > 0) {
+						console.log('Duplicate entry');
+					}
+				} else {
+					$scope.updateList();
+				}
 			});
 		};
+
+		$scope.updateList = function () {
+			status.getAll().success(function (data) {
+				$scope.status = data;
+			});
+		};
+
+		$scope.updateList();
 
 	}]);	
