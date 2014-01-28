@@ -14,6 +14,10 @@ AdminApp.config(
 			templateUrl: '/frontend/partials/admin/groups.html',
 			controller: 'GroupsCtrl'
 		})
+		.when('/admin/users', {
+			templateUrl: '/frontend/partials/admin/users.html',
+			controller: 'UsersCtrl'
+		})
 		.otherwise({
 			redirectTo: '/admin'
 		});
