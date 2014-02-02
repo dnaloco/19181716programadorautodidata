@@ -6,7 +6,7 @@ BlogApp.config(
 			templateUrl: '/frontend/partials/blog/home.html',
 			controller: 'HomeCtrl'
 		})
-		.when('/artigos/*',
+		.when('/artigos/:id',
 		{
 			templateUrl: '/frontend/partials/blog/artigos.html',
 			controller: 'ArtigosCtrl'
@@ -46,7 +46,7 @@ BlogApp.config(
 			templateUrl: '/frontend/partials/blog/contatos.html',
 			controller: 'ContatosCtrl'
 		})
-		.when('/login',
+		.when('/login/:request',
 		{
 			templateUrl: '/frontend/partials/blog/login.html',
 			controller: 'LoginCtrl'

@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require 'bootstrap.php';
 
 use Respect\Rest\Router;
@@ -8,7 +10,7 @@ $router = new Router('/index.php/');
 
 $data = array();
 
-if (isset($_SESSION['logget']) && $_SESSION['logged']) {
+if (isset($_SESSION['logged']) && $_SESSION['logged']) {
 	$data['user'] = $_SESSION['user'];
 } else {
 	unset($data['user']);
@@ -17,15 +19,27 @@ if (isset($_SESSION['logget']) && $_SESSION['logged']) {
 $router->get(['/admin/*/**'], function () {
 	global $data;
 	$data['sites'] = 'Admin - Programador Autodidata';
-	return render::renderHtml(array('layout'=>'admin-index.html'), $data);
 
-// TODO
 	if(isset($_SESSION['logged']) && $_SESSION['logged']) {
 		return render::renderHtml(array('layout'=>'admin-index.html'), $data);
 	} else {
-		header("Location: http://local.programadorautodidata/");
+		$request = $_SERVER['REQUEST_URI'];
+		header("Location: http://local.programadorautodidata/login".$request);
 	}
 	
+});
+
+$router->post('/login/*', function ($request) {
+
+	if ($_POST['user'] === 'arthur' && $_POST['password'] === '123456') { 
+		$_SESSION['logged'] = true;
+		$_SESSION['user'] = $_POST['user'];
+		$data['user'] = $_POST['user'];
+
+		header("Location: http://local.programadorautodidata/" . $request);
+	}
+
+	return 'você precisa logar';
 });
 
 $router->get(
@@ -35,7 +49,7 @@ $router->get(
 	'/curriculo',
 	'/trabalhos',
 	'/contatos',
-	'login'], 
+	'/login/*'], 
 	function ($id = NULL) {
 		global $data;
 
