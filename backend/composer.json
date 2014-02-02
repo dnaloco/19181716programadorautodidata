@@ -7,7 +7,8 @@
         "respect/rest": "dev-develop",
         "respect/validation": "dev-develop",
         "mustache/mustache": "~2.1",        
-        "phpunit/phpunit": "3.7.*"
+        "phpunit/phpunit": "3.7.*",
+        "phpmailer/phpmailer": "dev-master"
     },
     "autoload": {
         "psr-0": {"Blog\\": "src/", "Base\\": "src/", "Apps\\": "src/", "Auth": "src/"}

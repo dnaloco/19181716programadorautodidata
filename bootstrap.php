@@ -3,7 +3,10 @@
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
 
+// melhorar isso aqui...
 $configs = parse_ini_file('backend/src/configs.ini', true);
+
+date_default_timezone_set('America/Sao_Paulo');
 
 if((bool)$configs['isdev']) {
 	ini_set('display_errors', 1);

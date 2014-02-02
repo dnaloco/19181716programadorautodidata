@@ -1,0 +1,470 @@
+From the Angular mailing list I got an amazing thread that explains service vs factory vs provider and their injection usage. compiling the answers:
+
+Services
+
+Syntax: module.service( 'serviceName', function ); Result: When declaring serviceName as an injectable argument you will be provided with an instance of the function. In other words new FunctionYouPassedToService().
+
+Factories
+
+Syntax: module.factory( 'factoryName', function ); Result: When declaring factoryName as an injectable argument you will be provided with the value that is returned by invoking the function reference passed to module.factory.
+
+Providers
+
+Syntax: module.provider( 'providerName', function ); Result: When declaring providerName as an injectable argument you will be provided with new ProviderFunction().$get(). The constructor function is instantiated before the $get method is called - ProviderFunction is the function reference passed to module.provider.
+
+Providers have the advantage that they can be configured during the module configuration phase.
+
+see here for the provided code: http://jsbin.com/ohamub/1/edit
+
+and here's a great further explanation by Misko:
+
+provide.value('a', 123);
+
+function Controller(a) {
+  expect(a).toEqual(123);
+}
+
+//In this case the injector simply returns the value as is. 
+//But what if you want to compute the value. Then use a factory
+
+provide.factory('b', function(a) {
+  return a*2;
+});
+
+function Controller(b) {
+  expect(b).toEqual(246);
+}
+
+//So factory is a function which is responsible for creating the value. 
+//Notice that the factory 
+// function can ask for other dependencies. 
+//But what if you want to be more OO and have a class 
+// called Greeter
+
+function Greeter(a) {
+  this.greet = function() {
+    return 'Hello ' + a;
+  }
+}
+
+//then to instantiate you would have to write
+
+provide.factory('greeter', function(a) {
+  return new Greeter(a);
+});
+
+//Then we could ask for 'greeter' in controller like this
+
+function Controller(greeter) {
+  expect(greeter instanceof Greeter).toBe(true);
+  expect(greeter.greet()).toEqual('Hello 123');
+}    
+But that is way too wordy and a shorter way to write this would be provider.service('greeter', Greeter); .But what if we wanted to configure the Greeter class before the injection then we could write
+
+provide.provider('greeter2', function() {
+  var salutation = 'Hello';
+  this.setSalutation = function(s) {
+    salutation = s;
+  }
+
+  function Greeter(a) {
+    this.greet = function() {
+      return salutation + ' ' + a;
+    }
+  }
+
+  this.$get = function(a) {
+    return new Greeter(a);
+  };
+});
+
+//we can then do this
+
+angular.module('abc', []).config(function(greeter2Provider) {
+  greeter2Provider.setSalutation('Halo');
+});
+
+function Controller(greeter2) {
+  expect(greeter2.greet()).toEqual('Halo 123');
+}
+But it turns out that angular only understands $provide.provider, all other ones are derived.
+
+provider.service = function(name, Class) {
+  provider.provide(name, function() {
+    this.$get = function($injector) {
+      return $injector.instantiate(Class);
+    };
+  });
+}
+
+provider.factory = function(name, factory) {
+  provider.provide(name, function() {
+    this.$get = function($injector) {
+      return $injector.invoke(factory);
+    };
+  });
+}
+
+provider.value = function(name, value) {
+  provider.factory(name, function() {
+    return value;
+  });
+};
+share|improve this answer
+edited Nov 15 '13 at 22:17
+
+community wiki
+11 revs, 10 users 84%
+Lior
+9	  	
+See also stackoverflow.com/a/13763886/215945 which discusses the differences between service and factory. –  Mark Rajcok Mar 27 '13 at 18:10
+2	  	
+Would be helpful if you reformat your codeblock so we dont have all the scrollbars –  dynamo Mar 31 '13 at 17:50
+5	  	
+In the factory example I think there's an error: expect(a).toEqual(246); I guess that should be b? –  WickyNilliams Jun 5 '13 at 9:44
+1	  	
+In edit 611 I added usage of angular constants and values. To demonstrate the differences of the the other's already shown. jsbin.com/ohamub/611/edit –  Nick Jul 8 '13 at 15:30
+2	  	
+I think there is another mistake in the provider example. greeter.greet() returns 'Halo'. '123' is a parameter. –  roland Aug 14 '13 at 12:16
+show 1 more comment
+
+up vote
+198
+down vote
+live example
+
+" hello world " example
+
+with factory / service / provider :
+
+var myApp = angular.module('myApp', []);
+
+//service style, probably the simplest one
+myApp.service('helloWorldFromService', function() {
+    this.sayHello = function() {
+        return "Hello, World!"
+    };
+});
+
+//factory style, more involved but more sophisticated
+myApp.factory('helloWorldFromFactory', function() {
+    return {
+        sayHello: function() {
+            return "Hello, World!"
+        }
+    };
+});
+
+//provider style, full blown, configurable version     
+myApp.provider('helloWorld', function() {
+    // In the provider function, you cannot inject any
+    // service or factory. This can only be done at the
+    // "$get" method.
+
+    this.name = 'Default';
+
+    this.$get = function() {
+        var name = this.name;
+        return {
+            sayHello: function() {
+                return "Hello, " + name + "!"
+            }
+        }
+    };
+
+    this.setName = function(name) {
+        this.name = name;
+    };
+});
+
+//hey, we can configure a provider!            
+myApp.config(function(helloWorldProvider){
+    helloWorldProvider.setName('World');
+});
+
+
+function MyCtrl($scope, helloWorld, helloWorldFromFactory, helloWorldFromService) {
+
+    $scope.hellos = [
+        helloWorld.sayHello(),
+        helloWorldFromFactory.sayHello(),
+        helloWorldFromService.sayHello()];
+}​
+share|improve this answer
+edited Oct 22 '13 at 11:21
+
+answered Jul 30 '13 at 10:20
+
+EpokK
+6,74611136
+5	  	
+See it live here: jsfiddle.net/pkozlowski_opensource/PxdSP/14 –  smets.kevin Aug 30 '13 at 8:00
+ 	
+Doesn't this change context in the $get function? - you no longer refer to the instantiated provider in that function. –  Nate Oct 23 '13 at 19:17 
+ 	
+@Nate: this doesn't change context, actually, because what's being called is new Provider().$get(), where Provider is the function being passed to app.provider. That is to say that $get() is being called as a method on the constructed Provider, so this will refer to Provider as the example suggests. –  Brandon Oct 28 '13 at 15:50
+ 	
+@Brandon Ohh ok that's kindof neat then. Confusing at first glance - thanks for the clarification! –  Nate Oct 28 '13 at 16:03
+ 	
+Can you please explain $get use in provider ? –  Arham Ali Qureshi Nov 2 '13 at 21:24
+show 2 more comments
+up vote
+103
+down vote
+From document,
+
+An Angular "service" is a singleton object created by a "service factory". These service factories are functions which, in turn, are created by a "service provider". "The service providers are constructor functions". When instantiated they must contain a property called $get, which holds the service factory function.
+
+Whaaaaaaat? Am I reading a thesis? It is very confusing.
+
+With AngularJS, whenever I need data, I want to create an object with properties and methods. However, AngularJS satisfies this requirement in three different ways; service, factory, and provider.
+
+So, what do I use, Service, Factory, or Provider?
+
+I searched around for this answer, and I wasn't quite satisfied with the following answers, even with the accepted answer for this question.
+
+http://docs.angularjs.org/api/AUTO.$provide
+http://docs.angularjs.org/guide/dev_guide.services.creating_services
+http://blog.manishchhabra.com/2013/09/angularjs-service-vs-factory-with-example/
+http://clevertech.biz/devblog/angularjs-factory-service-provider/
+It all says how it is different, but why?
+
+The following is a real world example made up for this question, why.
+
+Car itself is just a concept. AngularJS call it as service
+A car is provided by a dealer,
+A car is made at a factory.
+Service, Factory, and Provider can be the same.
+
+From the following example, you will get concept of a car, not a car with 4 cylinders.
+
+app.service('CarService', function() {
+    this.numCylinder = 4;
+});
+
+app.factory('CarFactory', function() {
+    return {
+        numCylinder: 4
+    };
+});
+
+app.provider('CarProvider', function() {
+    this.$get = function() {
+        return {
+            numCylinder: 4
+        }
+    };
+});
+Demo: http://plnkr.co/edit/nJmPbgxARLR3hoJwXUET?p=preview
+
+They all gives you the same result.
+Then you may think, then why do I need a factory and provider?
+To get a different car, you cannot do it with just Service. You need Factory or Provider
+
+To instantiate, you need Factory or Provider
+
+How about I get a 6-cylinder car, and you get an 8-cylinder car?
+With service(a singleton), you cannot achieve this because service cannot be instantiated.
+
+app.service('CarService', function() {
+    this.numCylinder = 4;
+});
+
+app.factory('CarFactory', function() {
+    return function(numCylinder) {
+        this.numCylinder = numCylinder
+    };
+});
+
+app.provider('CarProvider', function() {
+    this.$get = function() {
+        return function(numCylinder) {
+            this.numCylinder = numCylinder
+        }
+    };
+});
+Demo: http://plnkr.co/edit/Axszeuoa0XOOK1XOq0It?p=preview
+
+As you see in the demo, and you will see my car and your car can actually have different number of cylinders.
+
+That's good enough for you?
+
+Assuming there is one dealer for cars that you and I have and it is "BAD" one, you and I want to change(set) it as "GOOD" one. How can we set this dealer to the application by telling it only once?
+
+With service, we cannot do that because service just provide the concept of car
+With factory, yes we can by passing the dealer as a parameter every time we instantiate it. That's not DRY.
+With provider, yes we can by setting the dealer only once, but how?
+Provider can be configured for your application
+
+This is how to implement setting the dealer of all cars.
+
+app.service('CarService', function () {
+    this.dealer = "Bad";
+    this.numCylinder = 4;
+});
+
+app.factory('CarFactory', function () {
+    return function (numCylinder) {
+        this.dealer = "Bad";
+        this.numCylinder = numCylinder
+    };
+});
+
+app.provider('CarProvider', function () {
+    this.dealerName = 'Bad';
+    this.$get = function () {
+        return function (numCylinder) {
+            this.numCylinder = numCylinder;
+            this.dealer = this.dealerName;
+        }
+    };
+    this.setDealerName = function (str) {
+        this.dealerName = str;
+    }
+});
+The following demo shows that we all have bad dealers
+
+Demo: http://plnkr.co/edit/NdX1bZuYTG3371QBR5lX?p=preview
+
+The following demo shows that we can configure the dealer.
+
+app.config(function (CarProviderProvider) {
+    CarProviderProvider.setDealerName('Good');
+});
+Demo: http://plnkr.co/edit/UDzRruJGVAHBkovf0OPT?p=preview
+
+But, why CarProviderProviderinstead of CarProvider?
+Because app.config only takes providers to be injected nothing else, therefore when you say
+
+app.config(function(CarProvider) { 
+    ....
+});
+It actually looks up CarProviderProvider, CarProvider plus Provider.
+
+For coding of provider, when you say
+
+app.provider('Car', function....) {
+    ....
+});
+It makes Car and CarProvider available for your application.
+
+So when you say app.provider(CarProvider...), it actually makesCarProvideras service andCarProviderProvider` as provider. It's not good, eh?
+
+That's why you see a lot of AngularJS code has a service and a provider at the same time. For an example, $route and $routeProvider, $http and $httpProvider, $location and $locationProvider, etc. As you see in API Reference, http://docs.angularjs.org/api/, all of AngularJS service is coded as a Provider, even $window.
+
+The following demo. shows the right way to define a provider.
+
+Demo: http://plnkr.co/edit/ia5b1OcyBD5piP7q8ATr?p=preview
+
+In conclusion,
+
+---------------------------------------------------  
+| Type    | Singleton| Instantiable | Configurable|
+---------------------------------------------------  
+| Service | Yes      | No           | No          |
+---------------------------------------------------  
+| Factory | Yes      | Yes          | No          |
+---------------------------------------------------  
+| Provider| Yes      | Yes          | Yes         |       
+---------------------------------------------------  
+
+
+Use Service when you need just a simple object such as a Hash, for example {foo:1, bar:2} It's easy to code, but you cannot instantiate it.
+
+Use Factory when you need to instantiate an object, i.e new Customer(), new Comment(), etc.
+
+Use Provider when you need to configure it. i.e. test url, QA url, production url.
+
+Personally, I would use provider all the time so that I don't have to change my code when I need to instantiate objects and when I need to configure it.
+
+To start at ease and if you are not comfortable with this.$get = function().., I would say there is nothing wrong with using Service first.
+
+--- Edit ---
+Adding another good explanation recommended by ng-newsletter, http://blog.xebia.com/2013/09/01/differences-between-providers-in-angularjs/
+
+share|improve this answer
+edited Jan 28 at 18:05
+
+answered Dec 16 '13 at 14:57
+
+allenhwkim
+4,48921230
+10	  	
+Wow! Thanks for the detailed explanation. You made it easy and crystal clear mate. Well done!!! –  Siva Dec 17 '13 at 22:37
+2	  	
+btw angular source uses providers everywhere: github.com/angular/angular.js/blob/v1.2.4/src/ng/document.js#L3 or github.com/angular/angular.js/blob/v1.2.5/src/ng/window.js#L3 –  Leonardo Dec 27 '13 at 6:40 
+1	  	
+This is the best explanation i have found on this forum for this topic. Everything is well explained –  Shayan Husaini Dec 30 '13 at 7:03
+ 	
+cracking explanation - really helped –  Terry_Brown Jan 7 at 23:12
+1	  	
+@StuartHemming, when provider is used in controller, it's used as a service, thus $get is only used. If you want to set the dealer in controller, you can simply add a function into it like this –  allenhwkim Jan 28 at 4:37
+show 3 more comments
+up vote
+9
+down vote
+I noticed something interesting when playing around with providers. Visibility of injectables is different for providers than it is for services and factories. If you declare an angularjs "constant" (e.g. myApp.constant('a', 'Robert');), you can inject it into services, factories, and providers. But if you declare an angularjs "value" (e.g. myApp.value('b', {name: 'Jones'});), you can inject it into services and factories, but NOT into the provider-creating function. You can, however, inject it into the $get function that you define for your provider. This is mentioned in the Angular docs but it's easy to miss. You can find it on the %provide page in the sections on the value and constant methods.
+
+http://jsfiddle.net/R2Frv/1/
+
+<div ng-app="MyAppName">
+    <div ng-controller="MyCtrl">
+        <p>from Service: {{servGreet}}</p>
+        <p>from Provider: {{provGreet}}</p>
+    </div>
+</div>
+
+var myApp = angular.module('MyAppName', []);
+
+myApp.constant('a', 'Robert');
+myApp.value('b', {name: 'Jones'});
+
+myApp.service('greetService', function(a,b) {
+    this.greeter = 'Hi there, ' + a + ' ' + b.name;
+});
+
+myApp.provider('greetProvider', function(a) {
+    this.firstName = a;
+    this.$get = function(b) {
+        this.lastName = b.name;
+        this.fullName = this.firstName + ' ' + this.lastName;
+        return this;
+    };
+});
+
+function MyCtrl($scope, greetService, greetProvider) {
+   $scope.servGreet = greetService.greeter;
+    $scope.provGreet = greetProvider.fullName;
+}
+share|improve this answer
+edited Aug 14 '13 at 12:41
+
+roland
+1,1941920	
+answered May 19 '13 at 19:53
+
+justlooking
+912
+ 	
+why this strange behavior? –  suzanshakya Oct 20 '13 at 19:14
+add comment
+up vote
+6
+down vote
+All Services are singletons, they get instantiated once per app. They can be of any type, whether it be a primitive, object literal, function, or even an instance of a custom type.
+
+The value, factory, service, constant, and provider methods are all providers. They teach the Injector how to instantiate the Services.
+
+The most verbose, but also the most comprehensive one is a Provider recipe. The remaining four recipe types — Value, Factory, Service and Constant — are just syntactic sugar on top of a provider recipe.
+
+the Value Recipe is the simplest case, where you instantiate the Service yourself and provide the instantiated value to the injector.
+The Factory recipe gives the Injector a factory function that it calls when it needs to instantiate the service. When called, the factory function creates and returns the service instance. The dependencies of the Service are injected as the functions's arguments. So using this recipe adds the following abilities:
+ability to use other services (have dependencies)
+service initialization
+delayed/lazy initialization
+The Service recipe is almost the same as the Factory recipe, but here the Injector invokes a constructor with the new operator instead of a factory function.
+The Provider recipe is usually overkill. It adds one more layer of indirection by allowing you to configure the creation of the factory.
+You should use the Provider recipe only when you want to expose an API for application-wide configuration that must be made before the application starts. This is usually interesting only for reusable services whose behavior might need to vary slightly between applications.
+
+The Constant recipe is just like the Value recipe except it allows you to define services that are available in the config phase. Sooner than services created using the Value recipe. Unlike Values, they cannot be decorated using decorator.
+See the provider docs.

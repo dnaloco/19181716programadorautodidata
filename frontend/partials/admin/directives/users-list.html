@@ -1,5 +1,29 @@
 <div>
 	<h2>User List</h2>
+	
 
-	[[teste]]
+	<h2>Novo Cadatro:</h2>
+	<form>
+		<label for="selectedStatus">Status do Usuário:</label>
+		<select ng-model="user.selectedStatus" ng-options="s as s.status for s in status" required>
+			<option value="">-- choose status --</option>
+		</select>
+
+		<label for="selectedGroup">Grupo do Usuário:</label>
+		<select ng-model="user.selectedGroup" ng-options="g as g.name for g in groups" required>
+			<option value="">-- choose group --</option>
+		</select>
+
+		<label for="userName">User:</label>
+		<input type="text" ng-model="user.user" required> <br>
+
+		<label for="firstName">Nome:</label>
+		<input type="text" ng-model="user.firstName" required>
+
+		<label for="lastName">Sobrenome:</label>
+		<input type="text" ng-model="user.lastName" required>
+
+		<label for="email">E-mail:</label>
+		<input type="text" ng-model="user.email" required>
+	</form>
 </div>

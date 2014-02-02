@@ -20,7 +20,7 @@ final class User
 	/**
 	 * @Column(length=20)
 	 */
-	private $fistName;
+	private $firstName;
 
 	/**
 	 * @Column(length=50)
@@ -54,12 +54,12 @@ final class User
 	private $status;
 
 	/**
-	 * @Column(length=32)
+	 * @Column(length=40, unique=true, nullable=true)
 	 */
 	private $activationKey;
 
 	/**
-	 * @Column(type="datetime")
+	 * @Column(type="datetime", nullable=true)
 	 */
 	private $last_login;
 
@@ -122,9 +122,9 @@ final class User
      *
      * @return mixed
      */
-    public function getFistName()
+    public function getFirstName()
     {
-        return $this->fistName;
+        return $this->firstName;
     }
     
     /**
@@ -134,9 +134,9 @@ final class User
      *
      * @return self
      */
-    public function setFistName($fistName)
+    public function setFirstName($firstName)
     {
-        $this->fistName = $fistName;
+        $this->firstName = $firstName;
 
         return $this;
     }

@@ -1,0 +1,336 @@
+Stack Exchange sign up log in tour help  careers 2.0  
+
+
+Stack Overflow
+Questions
+Tags
+Tour
+Users
+Ask Question
+Take the 2-minute tour × Stack Overflow is a question and answer site for professional and enthusiast programmers. It's 100% free, no registration required.
+Non-Singleton Services in Angular
+
+up vote
+5
+down vote
+favorite
+5
+Angular clearly states in its documentation that Services are Singletons:
+
+Angular services are singletons
+Counterintuitively, module.factory also returns a Singleton instance.
+
+Given that there are plenty of use-cases for non-singleton services, what is the best way to implement the factory method to return instances of a Service, so that each time an ExampleService dependency is declared, it is satisfied by a different instance of ExampleService?
+
+service angularjs singleton instance factory
+share|improve this question
+asked May 18 '13 at 15:46
+
+Pedr
+5,96814081
+ 	
+Assuming you could do this, should you? Other Angular developers would not be expecting a dependency-injected factory to be returning new instances all the time. –  Mark Rajcok May 18 '13 at 16:52
+ 	
+I guess that's a matter for documentation. I think it's a shame that this wasn't supported out of the gate as there is now an expectation that all Services will be Singletons, but I see no reason to limit them to Singletons. –  Pedr May 20 '13 at 8:49
+add comment
+3 Answers
+activeoldestvotes
+up vote
+6
+down vote
+accepted
+I don't think we should ever have a factory return a newable function as this begins to break down dependency injection and the library will behave awkwardly, especially for third parties. In short, I am not sure there are any legitimate use cases for non-singleton sevices.
+
+A better way to accomplish the same thing is to use the factory as an API to return a collection of objects with getter and setter methods attached to them. Here is some pseudo-code showing how using that kind of service might work:
+
+.controller( 'MainCtrl', function ( $scope, widgetService ) {
+  $scope.onSearchFormSubmission = function () {
+    widgetService.findById( $scope.searchById ).then(function ( widget ) {
+      // this is a returned object, complete with all the getter/setters
+      $scope.widget = widget;
+    });
+  };
+
+  $scope.onWidgetSave = function () {
+    // this method persists the widget object
+    $scope.widget.$save();
+  };
+});
+This is just pseudo-code for looking up a widget by ID and then being able to save changes made to the record.
+
+Here's some pseudo-code for the service:
+
+.factory( 'widgetService', function ( $http ) {
+
+  function Widget( json ) {
+    angular.extend( this, json );
+  }
+
+  Widget.prototype = {
+    $save: function () {
+      // TODO: strip irrelevant fields
+      var scrubbedObject = //...
+      return $http.put( '/widgets/'+this.id, scrubbedObject );
+    }
+  };
+
+  function getWidgetById ( id ) {
+    return $http( '/widgets/'+id ).then(function ( json ) {
+      return new Widget( json );
+    });
+  }
+
+
+  // the public widget API
+  return {
+    // ...
+    findById: getWidgetById
+    // ...
+  };
+});
+Though not included in this example, these kinds of flexible services could also easily manage state.
+
+I don't have time right now, but if it will be helpful I can put together a simple Plunker later to demonstrate.
+
+share|improve this answer
+answered May 18 '13 at 17:12
+
+Josh David Miller
+40.3k34853
+ 	
+This is really interesting. An example would be really helpful. Thanks a lot. –  Pedr May 18 '13 at 17:16
+ 	
+This is interesting. It seems like it would function similar to an angular $resource. –  Jonathan Palumbo May 18 '13 at 17:20
+ 	
+@JonathanPalumbo You're right - very similar to ngResource. In fact, Pedr and I started this discussion tangentially in another question where I suggested taking an approach similar to ngResource. For an example so simple as this, there's no advantage to doing it manually - ngResource or Restangular would work swimmingly. But for cases not so completely typical, this approach makes sense. –  Josh David Miller May 18 '13 at 18:07
+ 	
+Restangular is new to me, looks very promising almost like a client side version of linq. –  Jonathan Palumbo May 19 '13 at 0:39
+ 	
+@Pedr Sorry, I forgot about this. Here's a super-simple demo: plnkr.co/edit/Xh6pzd4HDlLRqITWuz8X –  Josh David Miller May 24 '13 at 5:11
+show 1 more comment
+
+up vote
+6
+down vote
+I'm not entirely sure what use case you are trying to satisfy. But it is possible to have a factory return instances of an object. You should be able to modify this to suit your needs.
+
+var ExampleApplication = angular.module('ExampleApplication', []);
+
+
+ExampleApplication.factory('InstancedService', function(){
+
+    function Instance(name, type){
+        this.name = name;
+        this.type = type;
+    }
+
+    return {
+        Instance: Instance
+    }
+
+});
+
+
+ExampleApplication.controller('InstanceController', function($scope, InstancedService){
+       var instanceA = new InstancedService.Instance('A','string'),
+           instanceB = new InstancedService.Instance('B','object');
+
+           console.log(angular.equals(instanceA, instanceB));
+
+});
+JsFiddle
+
+Updated
+
+Consider the following request for non-singleton services. In which Brian Ford notes:
+
+The idea that all services are singletons does not stop you from writing singleton factories that can instantiate new objects.
+
+and his example of returning instances from factories:
+
+myApp.factory('myService', function () {
+  var MyThing = function () {};
+  MyThing.prototype.foo = function () {};
+  return {
+    getInstance: function () {
+      return new MyThing();
+    }
+  };
+});
+I would also argue his example is superior due to the fact that you do not have to use the new keyword in your controller. It is encapsulated within the getInstance method of the service.
+
+share|improve this answer
+edited May 18 '13 at 17:26
+
+answered May 18 '13 at 16:27
+
+Jonathan Palumbo
+1,296316
+ 	
+Thanks for the example. So there is no way to have the DI Container satisfy the dependency with an instance. The only way is to have it satisfy the dependency with a provider which can then be used to generate the instance? –  Pedr May 18 '13 at 16:34 
+ 	
+See post update. –  Jonathan Palumbo May 18 '13 at 17:01
+ 	
+Thanks. I agree that it is better than having to use new in a service, however I think it still falls short. Why should the class that is dependent on the service know or care that the service it's being supplied with is or isn't a Singleton? Both these solutions fail to abstract this fact and are pushing something that I believe should be internal to the DI container into the dependent. When you create a Service, I see know harm in allowing the creator to decide whether or not they would like it to be supplied as a singleton or as separate instances. –  Pedr May 18 '13 at 18:11
+ 	
++1 Very help. I'm using this approach with ngInfiniteScroll and a custom search service so I can delay initialisation until some click event. JSFiddle of 1st answer updated with second solution: jsfiddle.net/gavinfoley/G5ku5 –  GFoley83 Aug 19 '13 at 3:29
+add comment
+up vote
+6
+down vote
+Another way is to copy service object with angular.extend().
+
+app.factory('Person', function(){
+  return {
+    greet: function() { return "Hello, I'm " + this.name; },
+    copy: function(name) { return angular.extend({name: name}, this); }
+  };
+});
+and then, for example, in your controller
+
+app.controller('MainCtrl', function ($scope, Person) {
+  michael = Person.copy('Michael');
+  peter = Person.copy('Peter');
+
+  michael.greet(); // Hello I'm Michael
+  peter.greet(); // Hello I'm Peter
+});
+Here is a plunk.
+
+share|improve this answer
+edited Oct 24 '13 at 9:45
+
+answered Oct 24 '13 at 9:37
+
+Evgeny
+2,1242134
+add comment
+Your Answer
+
+ 
+Sign up or log in
+
+Sign up using Google
+Sign up using Facebook
+Sign up using Stack Exchange
+Post as a guest
+
+Name
+
+Email
+
+ 
+By posting your answer, you agree to the privacy policy and terms of service.
+
+Not the answer you're looking for?	 Browse other questions tagged service angularjs singleton instance factory or ask your own question.
+tagged
+angularjs × 23749
+service × 9717
+singleton × 3539
+instance × 1851
+factory × 919
+asked
+8 months ago
+viewed
+2616 times
+active
+3 months ago
+
+Ruby on Rails Software Engineer - All Levels
+GuideSpark
+Menlo Park, CA
+Desenvolvedor Back End
+Scup
+Sao Paulo, Brazil
+Junior Software Engineer - work at Lake Tahoe
+Informa Investment Solutions
+Zephyr Cove, NV
+Linked
+27 Where Should Model State Be Stored In Angular.js
+Related
+0 Factory Initializer + Singleton
+1 Can't get factory or service to be recognized in controller with angluarjs using angular-seed
+5 Should an Angular service have state?
+1 What is a singleton/borg pattern? Why don't they work for me/where is my concept wrong?
+0 Create a Singleton Factory for a Class that takes parameters / arguements
+1 Angular: Update service and share data between controllers
+-1 Angular: share asynchronous service data between controllers
+0 angular service not work as singleton
+3 How can I create an angular JS service that isn't a singleton?
+0 Angular and non shared services
+Hot Network Questions
+Why do credit card forms ask for Visa, Mastercard, etc.?
+I'm a teenager hoping to become a mathematician, but math isn't my forte. Is it possible?
+How to draw a thin rectangle
+Make a PNG image with "Hello World!" with programming APIs, in the shortest code possible
+Why am I not burned by a strong wind?
+Can you grab any IP address on the Internet?
+What is newspaper paper called?
+little handle of Ethernet cable head is broken and missing
+Is there a non-sexual phrase for sleeping with someone?
+Can TikZ create pixel art images?
+for(auto i : c) -- Is there a short way to do it in reverse direction?
+Why do American colleges and universities have sports teams?
+How can I "grep" patterns across multiple lines?
+Coin flipping probability game ; 7 flips vs 8 flips
+First Scala FizzBuzz implementation
+In Scrum, who verifies "Done"?
+DM taking away XP from players as a form of punishment
+Is it bad to redirect http to https?
+Extracting angles from a simple picture
+Which directory MUST exist in / to qualify an OS as Linux
+Does this symbol /æ/ mean two sounds?
+About command "For[]" and "Null"
+What is the danger of inserting and browsing an untrusted USB drive?
+How to handle client requests to violate copyrights?
+question feed
+about help badges blog chat data legal privacy policy jobs advertising info mobile contact us feedback
+TECHNOLOGY	 LIFE / ARTS	 CULTURE / RECREATION	 SCIENCE	 OTHER
+Stack Overflow
+Server Fault
+Super User
+Web Applications
+Ask Ubuntu
+Webmasters
+Game Development
+TeX - LaTeX
+Programmers
+Unix & Linux
+Ask Different (Apple)
+WordPress Answers
+Geographic Information Systems
+Electrical Engineering
+Android Enthusiasts
+Information Security
+Database Administrators
+Drupal Answers
+SharePoint
+User Experience
+Mathematica
+more (14)
+Photography
+Science Fiction & Fantasy
+Seasoned Advice (cooking)
+Home Improvement
+more (13)
+English Language & Usage
+Skeptics
+Mi Yodeya (Judaism)
+Travel
+Christianity
+Arqade (gaming)
+Bicycles
+Role-playing Games
+more (21)
+Mathematics
+Cross Validated (stats)
+Theoretical Computer Science
+Physics
+MathOverflow
+more (7)
+Stack Apps
+Meta Stack Overflow
+Area 51
+Stack Overflow Careers
+site design / logo © 2014 stack exchange inc; user contributions licensed under cc by-sa 3.0 with attribution required
+rev 2014.1.31.1342

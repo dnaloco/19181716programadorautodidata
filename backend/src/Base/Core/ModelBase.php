@@ -69,7 +69,6 @@ abstract class ModelBase
 
     public function update ($id, $data)
     {
-
         $objectEntity = self::$em->find(static::$_entity, $id);
         $objectEntity = self::$hydrator->hydrate($data, $objectEntity);
 

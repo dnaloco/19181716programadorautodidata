@@ -1,0 +1,146 @@
+element.style {
+}
+local.programadorautodidata/media="screen, projection"
+.row {
+width: auto;
+margin-left: -0.625rem;
+margin-right: -0.625rem;
+margin-top: 0;
+margin-bottom: 1.25rem;
+max-width: none;
+}
+local.programadorautodidata/media="screen, projection"
+.row {
+width: 100%;
+margin-left: auto;
+margin-right: auto;
+margin-top: 0;
+margin-bottom: 0;
+max-width: 62.5rem;
+}
+local.programadorautodidata/media="screen, projection"
+div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, p, blockquote, th, td {
+margin: 0;
+padding: 0;
+}
+local.programadorautodidata/media="screen, projection"
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+margin: 0;
+padding: 0;
+border: 0;
+font: inherit;
+font-size: 100%;
+vertical-align: baseline;
+}
+local.programadorautodidata/media="screen, projection"
+*, *:before, *:after {
+-moz-box-sizing: border-box;
+-webkit-box-sizing: border-box;
+box-sizing: border-box;
+}
+user agent stylesheetdiv {
+display: block;
+}
+Pseudo ::before element
+local.programadorautodidata/media="screen, projection"
+.row .row:before, .row .row:after {
+content: " ";
+display: table;
+}
+local.programadorautodidata/media="screen, projection"
+.row:before, .row:after {
+content: " ";
+display: table;
+}
+local.programadorautodidata/media="screen, projection"
+*, *:before, *:after {
+-moz-box-sizing: border-box;
+-webkit-box-sizing: border-box;
+box-sizing: border-box;
+}
+Pseudo ::after element
+local.programadorautodidata/media="screen, projection"
+.row .row:after {
+clear: both;
+}
+local.programadorautodidata/media="screen, projection"
+.row .row:before, .row .row:after {
+content: " ";
+display: table;
+}
+local.programadorautodidata/media="screen, projection"
+.row:after {
+clear: both;
+}
+local.programadorautodidata/media="screen, projection"
+.row:before, .row:after {
+content: " ";
+display: table;
+}
+local.programadorautodidata/media="screen, projection"
+*, *:before, *:after {
+-moz-box-sizing: border-box;
+-webkit-box-sizing: border-box;
+box-sizing: border-box;
+}
+Inherited from div
+local.programadorautodidata/media="screen, projection"
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+font: inherit;
+font-size: 100%;
+}
+Inherited from div#partial-home.ng-scope
+local.programadorautodidata/media="screen, projection"
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+font: inherit;
+font-size: 100%;
+}
+Inherited from div.ng-scope
+local.programadorautodidata/media="screen, projection"
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+font: inherit;
+font-size: 100%;
+}
+Inherited from section#partial-content.row
+local.programadorautodidata/media="screen, projection"
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+font: inherit;
+font-size: 100%;
+}
+Inherited from body.ng-scope
+local.programadorautodidata/media="screen, projection"
+body {
+color: #222222;
+font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+font-weight: normal;
+font-style: normal;
+line-height: 1;
+cursor: default;
+}
+local.programadorautodidata/media="screen, projection"
+html, body {
+font-size: 100%;
+}
+local.programadorautodidata/media="screen, projection"
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+font: inherit;
+font-size: 100%;
+}
+Inherited from html.js.flexbox.flexboxlegacy.canvas.canvastext.webgl.no-touch.geolocation.postmessage.websqldatabase.indexeddb.hashchange.history.draganddrop.websockets.rgba.hsla.multiplebgs.backgroundsize.borderimage.borderradius.boxshadow.textshadow.opacity.cssanimations.csscolumns.cssgradients.cssreflections.csstransforms.csstransforms3d.csstransitions.fontface.generatedcontent.video.audio.localstorage.sessionstorage.webworkers.applicationcache.svg.inlinesvg.smil.svgclippaths
+local.programadorautodidata/media="screen, projection"
+html, body {
+font-size: 100%;
+}
+local.programadorautodidata/media="screen, projection"
+html {
+font-family: sans-serif;
+}
+local.programadorautodidata/media="screen, projection"
+html {
+line-height: 1;
+}
+local.programadorautodidata/media="screen, projection"
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+font: inherit;
+font-size: 100%;
+}
