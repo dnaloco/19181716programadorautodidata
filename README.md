@@ -1,4 +1,4 @@
-19181716programadorautodidata
+programadorautodidata
 =============================
 
 Site do programador autodidata
